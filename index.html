@@ -1,0 +1,86 @@
+<html>
+<head>
+	<title>Reative Form</title>
+	<style>
+		fieldset{
+			width:280px;
+			float:left;
+		}
+	</style>
+</head>
+<body>
+<h1>Task</h1>
+<hr />
+<h3>Login to Net-Banking</h3>
+<fieldset>
+<form action="homepage.jsp" onsubmit="return f1()">
+Username:
+<input type="text" name="uname"/> 
+<br /><br />
+Password:
+<input type="password" name="pwd"/> 
+<br /><br />
+<input type="button" id="btn" value="Login with OTP" />
+<hr />
+Enter OTP:
+<input type="number" id="n1" disabled />
+<span id="sp1"></span>
+<br /><br />
+<input type="submit" id="sub1" value="Submit to Validate"  disabled />
+</form>
+</fieldset>
+
+<script>
+var mainotp="";		//global-var
+var btn = document.getElementById("btn");
+btn.addEventListener("click",function(){
+	var genotp=""	//local-var
+	for(i=1;i<=6;i++)
+	{
+		var x = Math.random();	//gen-random-no b/w 0 to 1(decimal)
+		console.log(x);
+		var y = x*10;	//no becomes 0 to 9 (decimal)
+		console.log(y);
+		var z = Math.floor(y);  //0 to 9 (int)
+		console.log(z);
+		
+		genotp=genotp+z;
+	}
+	window.alert(genotp);
+	console.log(genotp);
+	
+	mainotp = genotp;
+	
+var n1 = document.getElementById("n1");
+		n1.removeAttribute("disabled");
+var sub1 = document.getElementById("sub1");
+		sub1.removeAttribute("disabled");
+
+	});
+	
+	function f1()
+	{
+		window.alert("Validating OTP...Please wait!!!");
+	console.log("Main OTP : "+mainotp);
+	
+	var n1 = document.getElementById("n1");
+	console.log("Entered OTP : "+n1.value);
+		
+	if (mainotp == n1.value)	
+	{
+		window.alert("OTP IS Correct");
+		return true;
+	}
+	else
+	{
+		window.alert("OTP IS NOT-OK");
+	var sp1 = document.getElementById("sp1");
+	sp1.innerText="(*Re-Enter Correct OTP)";
+	sp1.style.color="red";
+	sp1.style.fontSize="10px";
+		return false;
+	}
+	}
+</script>	
+</body>
+</html>
